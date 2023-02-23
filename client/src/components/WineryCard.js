@@ -7,14 +7,21 @@ import { UserContext } from '../context/User';
 
 const WineryCard = ({winery, visits, onChangeRating, onAddRating}) => { 
 
-    const {currentUser} = useContext(UserContext)
 
+    const {currentUser} = useContext(UserContext)
+    
   
     const {id, name, about, tastingcost, rezrequired, imagesrc, city, avgRating } = winery
-    
-    const wineryVisits = visits.filter(visit => visit.winery.id === winery.id) 
+
+    const wineryVisits = visits.filter(visit => visit.winery.id === id) 
  
-    const userVisit = wineryVisits.find(visit => visit.userId === currentUser.id)
+    let userVisit; 
+    
+    if (wineryVisits.length >= 1 && currentUser) {
+        userVisit = wineryVisits.find(visit => visit.user.id === currentUser.id) 
+    } else {
+        userVisit = null
+    }
 
 
     const handleAddRating = () => {
@@ -28,7 +35,7 @@ const WineryCard = ({winery, visits, onChangeRating, onAddRating}) => {
 
     const handleChangeRating = (rating) => {
         const updatedVisitObj = {
-            id: userVisit.id,
+            id: userVisit[0].id,
             userId: currentUser,
             wineryId: winery.id,
             rating: rating
