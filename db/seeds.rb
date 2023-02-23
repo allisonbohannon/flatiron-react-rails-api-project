@@ -863,3 +863,12 @@ winery_data = [
 # winery_data.each do |winery| 
 #     Winery.create(winery)
 # end
+
+
+50.times do 
+    Visit.create(
+        user_id: rand(1..10),
+        winery_id: rand(1..7),
+        rating: rand(1..6)
+    )
+end
