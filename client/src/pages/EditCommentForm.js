@@ -4,7 +4,7 @@ import { UserContext } from '../context/User';
 import { Container, FormField, Button, CardHeading } from '../styles';
 
 
-const EditCommentForm = ({wineries, onCommentEdit, onCommentDelete}) => {
+const EditCommentForm = ({comments, wineries, onEditComment, onDeleteComment}) => {
 
     const navigate = useNavigate()
 
@@ -12,17 +12,18 @@ const EditCommentForm = ({wineries, onCommentEdit, onCommentDelete}) => {
 
     const {wineryId, commentId} = useParams()
 
+    console.log({wineryId, commentId})
+
+    const comment = comments.find(comment => comment.id === parseInt(commentId))
     const winery = wineries.find(winery => winery.id === parseInt(wineryId))
-    const comment = winery.comments.find(comment => comment.id === parseInt(commentId))
-    
 
     
-    // useEffect(() => {
-    //     if (comment.userId !== currentUser) {
-    //         navigate(`/wineries/${winery.id}/comments/${comment.id}`)
-    //         console.log("Edit Access Denied")
-    //     }
-    // })
+    useEffect(() => {
+        if (comment.user.id !== currentUser.id) {
+            navigate(`/wineries/${winery.id}/comments/${comment.id}`)
+            console.log("Edit Access Denied")
+        }
+    })
 
     const [commentText, setCommentText] = useState(comment.text)
   
@@ -31,39 +32,20 @@ const EditCommentForm = ({wineries, onCommentEdit, onCommentDelete}) => {
 
         const updatedComment = {...comment, text: commentText}
 
-        const updatedWinery = {...winery, comments: winery.comments.map(originalComment => {
-            if (comment.id === originalComment.id) {
-                return updatedComment
-            } else {
-                return originalComment
-            }
-        })}
-
-
-        // fetch(`${process.env.REACT_APP_API_URL}/comments/${id}`, { 
-        //     method: "PATCH", 
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify(commentObj)
-        //      })
-        //  .then(response => response.json())
-        //  .then(data => handleCommentEdit(data))
-
-        onCommentEdit(updatedWinery)
-
+        fetch(`/comments/${comment.id}`, { 
+            method: "PATCH", 
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updatedComment)
+             })
+         .then(response => response.json())
+         .then(data => onEditComment(data))
+     
         navigate(-1)
     }
 
     const handleDelete = () => {
 
-        const updatedWinery = {...winery, comments: winery.comments.filter(originalComment => {
-            if (comment.id !== originalComment.id) {
-                return true
-            } else {
-                return false
-            }
-        })}
-
-        onCommentDelete(updatedWinery)
+        onDeleteComment(comment)
 
         navigate(-1)
         

@@ -50,15 +50,15 @@ function App() {
 
   }
 
-  const onCommentEdit = (updatedWinery) => {
-    const updatedWineries= wineries.map(winery => {
-      if (winery.id === updatedWinery.id) { 
-        return updatedWinery
+  const onEditComment = (updatedComment) => {
+    const updatedComments = comments.map(comment => {
+      if (comment.id === updatedComment.id) { 
+        return updatedComment
       } else {
-        return winery}
+        return comment
       }
-    )
-    setWineries(updatedWineries)
+    })
+    setComments(updatedComments)
   }
 
   const onSignup = (userObject) => {
@@ -134,7 +134,7 @@ function App() {
                  <Route path="/wineries/:wineryId/comments/:commentId/edit" element={<EditCommentForm
                   wineries={wineries}
                   comments={comments}
-                  onCommentEdit={onCommentEdit}
+                  onEditComment={onEditComment}
                 />}/>
                  <Route path="/wineries/:wineryId/comments/new" element={<AddCommentForm
                   wineries={wineries}

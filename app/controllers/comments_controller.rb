@@ -4,4 +4,5 @@ class CommentsController < ApplicationController
         comments = Comment.all
         render json: comments 
     end
+
 end

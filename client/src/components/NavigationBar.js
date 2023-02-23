@@ -6,8 +6,8 @@ import { UserContext } from '../context/User';
 const NavigationBar = ({users}) =>  {
 
     const { currentUser, setCurrentUser } = useContext(UserContext)
-    const testUser = users[5]
-    setCurrentUser(testUser)
+    // const testUser = users[5]
+    // setCurrentUser(testUser)
 
     useEffect(() => {
         // auto-login
@@ -24,10 +24,10 @@ const NavigationBar = ({users}) =>  {
     
 
     const handleLogout = () =>{
-
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
               setCurrentUser(null);
+            } else {
             }
           });
     }

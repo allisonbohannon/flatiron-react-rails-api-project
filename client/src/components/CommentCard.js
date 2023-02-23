@@ -4,17 +4,15 @@ import { UserContext } from '../context/User';
 import { Button } from '../styles';
 
 
-const CommentCard = ({comment, wineries, users}) => {
+const CommentCard = ({comment}) => {
 
 
     const {currentUser} = useContext(UserContext)
 
     const checkIfCurrentUser = currentUser.id === comment.user.id ? true : false 
-    const targetUser = users.find(user => comment.user.id = user.id)
-    const targetWinery = wineries.filter(winery => comment.winery.id === winery.id)
     
-    const author = <p style={{fontStyle:"italic"}}>{targetUser.username}</p>
-    const button = <Link to={`/wineries/${targetWinery.id}/comments/${comment.id}/edit`}>
+    const author = <p style={{fontStyle:"italic"}}>{comment.user.username}</p>
+    const button = <Link to={`/wineries/${comment.winery.id}/comments/${comment.id}/edit`}>
                     <Button>Edit</Button>
                     </Link>
 
