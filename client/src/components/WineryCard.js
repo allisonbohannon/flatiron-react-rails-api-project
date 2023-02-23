@@ -12,7 +12,7 @@ const WineryCard = ({winery, visits, onChangeRating, onAddRating}) => {
   
     const {id, name, about, tastingcost, rezrequired, imagesrc, city, avgRating } = winery
     
-    const wineryVisits = visits.filter(visit => visit.wineryId === winery.id) 
+    const wineryVisits = visits.filter(visit => visit.winery.id === winery.id) 
  
     const userVisit = wineryVisits.find(visit => visit.userId === currentUser.id)
 

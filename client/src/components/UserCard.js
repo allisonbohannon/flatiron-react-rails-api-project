@@ -3,21 +3,13 @@ import { Card, CardBody, CardHeader, CardHeading, CardScroller } from '../styles
 import StarRatingShow from './StarRatingShow';
 
 
-const UserCard = ({user, wineries, visits}) => {    
+const UserCard = ({user, visits}) => {    
 
-    const userVisits = visits.filter(visit => visit.userId === user.id)
- 
+    const userVisits = visits.filter(visit => visit.user.id === user.id)
         
     const userRatings = userVisits.map(visit => { 
-        const targetWinery = wineries.find(winery => winery.id === visit.wineryId) 
-        if (targetWinery){
-            return (<li>{targetWinery.name}: <StarRatingShow rating={visit.rating}/></li>)
-        }
-        
+            return (<li>{visit.winery.name}: <StarRatingShow rating={visit.rating}/></li>)
     })
-
-
-      
  
   
  return (

@@ -34,8 +34,11 @@ function App() {
     .then(r => r.json())
     .then(data => setUsers(data))
 
+    fetch(`/visits`)
+    .then(r => r.json())
+    .then(data => setVisits(data))
+
     setComments(commentsTest)
-    setVisits(visitsTest)
   }, [])
 
 
