@@ -852,23 +852,23 @@ winery_data = [
 
 
 
-# 10.times do 
-#     User.create(
-#         username: Faker::Name.unique.first_name,
-#         password_digest: BCrypt::Password.create('password'),
-#     )
-# end
+10.times do 
+    User.create(
+        username: Faker::Name.unique.first_name,
+        password_digest: BCrypt::Password.create('password'),
+    )
+end
 
 
-# winery_data.each do |winery| 
-#     Winery.create(winery)
-# end
+winery_data.each do |winery| 
+    Winery.create(winery)
+end
 
 
 50.times do 
     Visit.create(
         user_id: rand(1..10),
-        winery_id: rand(1..7),
+        winery_id: rand(1..50),
         rating: rand(1..6)
     )
 end

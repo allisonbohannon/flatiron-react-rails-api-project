@@ -1,12 +1,13 @@
 class WineriesController < ApplicationController
 
     def index 
-        render json: Winery.all 
+        wineries = Winery.all
+        render json: wineries, methods: [:avg_rating]
     end
 
     def show
         winery = Winery.find(params[:id])
-        render json: winery
+        render json: winery, methods: [:avg_rating]
     end
     
 end
