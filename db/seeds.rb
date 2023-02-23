@@ -852,23 +852,39 @@ winery_data = [
 
 
 
-10.times do 
-    User.create(
-        username: Faker::Name.unique.first_name,
-        password_digest: BCrypt::Password.create('password'),
-    )
-end
+# 10.times do 
+#     User.create(
+#         username: Faker::Name.unique.first_name,
+#         password_digest: BCrypt::Password.create('password'),
+#     )
+# end
 
 
-winery_data.each do |winery| 
-    Winery.create(winery)
-end
+# winery_data.each do |winery| 
+#     Winery.create(winery)
+# end
 
 
-50.times do 
-    Visit.create(
-        user_id: rand(1..10),
-        winery_id: rand(1..50),
-        rating: rand(1..6)
-    )
-end
+# 50.times do 
+#     winery_count = Winery.count + 1
+#     user_count = User.count + 1 
+
+
+#     Visit.create(
+#         user_id: rand(1..user_count),
+#         winery_id: rand(1..winery_count),
+#         rating: rand(1..6)
+#     )
+# end
+
+# 50.times do 
+#     winery_count = Winery.count + 1
+#     user_count = User.count + 1 
+
+
+#     Comment.create(
+#         user_id: rand(1..user_count),
+#         winery_id: rand(1..winery_count),
+#         text: Faker::Quote.jack_handey
+#     )
+# end

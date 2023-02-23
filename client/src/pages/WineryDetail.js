@@ -15,20 +15,26 @@ const WineryDetail = ({wineries, visits, comments, users, onChangeRating, onAddR
   const navigate = useNavigate()
 
   const displayWinery = wineries.find(winery => winery.id === parseInt(wineryId))
-  console.log(displayWinery)
+
+  const relatedComments = comments.filter(comment => comment.winery.id === displayWinery.id)
+
+  let displayComments; 
+
+  if (relatedComments.length >= 1) {
+    displayComments = relatedComments.map(comment => {
+      return (<li key={comment.id} style={{listStyle:"none"}}>
+          <CommentCard  comment={comment} users={users} wineries={wineries} /> 
+        </li>)
+    })     
+  } else {
+    displayComments = <p>No one has left any comment's yet!</p>
+  }
 
 
-  const relatedComments = comments.filter(comment => comment.wineryId === displayWinery.id)
-  console.log(comments)
+  
+  
 
-  const displayComments = relatedComments.map(comment => {
-    console.log(comment)
-    return (<li key={comment.id} style={{listStyle:"none"}}>
-        <CommentCard  comment={comment} users={users} wineries={wineries} /> 
-      </li>)
-  })
-
-  const userVisit = visits.find(visit => visit.userId === currentUser)
+  const userVisit = visits.find(visit => visit.user.id === currentUser)
 
   const handleClick = () => {
     navigate(-1)

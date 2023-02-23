@@ -38,7 +38,9 @@ function App() {
     .then(r => r.json())
     .then(data => setVisits(data))
 
-    setComments(commentsTest)
+    fetch(`/comments`)
+    .then(r => r.json())
+    .then(data => setComments(data))
   }, [])
 
 

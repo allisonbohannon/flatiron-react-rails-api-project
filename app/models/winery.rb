@@ -10,7 +10,7 @@ class Winery < ApplicationRecord
             holder_arr << visit.rating 
        end
 
-       holder_arr.sum/holder_arr.length
+       holder_arr.sum/holder_arr.count
 
     end
 
