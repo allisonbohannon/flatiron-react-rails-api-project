@@ -3,4 +3,6 @@ class User < ApplicationRecord
 
     has_many :visits
     has_many :wineries, through: :visits
+
+    has_many :comments
 end
