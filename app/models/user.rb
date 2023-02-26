@@ -5,4 +5,8 @@ class User < ApplicationRecord
     has_many :wineries, through: :visits
 
     has_many :comments
+
+    validates :username, presence: true, uniqueness: true
+    validates :password, length: { minimum: 8 }
+
 end
