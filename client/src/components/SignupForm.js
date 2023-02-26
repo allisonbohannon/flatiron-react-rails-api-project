@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Button, Error, Input, FormField, Label, Textarea } from "../styles";
 import { UserContext } from "../context/User";
 
-function SignUpForm({onAddUser}) {
+function SignUpForm({onAddUser, onLogin}) {
 
   const { currentUser, setCurrentUser } = useContext(UserContext)
 
@@ -25,28 +25,28 @@ function SignUpForm({onAddUser}) {
         bio,
       }
 
-    // setErrors([]);
-    // setIsLoading(true);
-    // fetch("/signup", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     username,
-    //     password,
-    //     password_confirmation: passwordConfirmation,
-    //     image_url: imageUrl,
-    //     bio,
-    //   }),
-    // }).then((r) => {
-    //   setIsLoading(false);
-    //   if (r.ok) {
-    //     r.json().then((user) => onLogin(user));
-    //   } else {
-    //     r.json().then((err) => setErrors(err.errors));
-    //   }
-    // });
+    setErrors([]);
+    setIsLoading(true);
+    fetch("/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+        password_confirmation: passwordConfirmation,
+        image_url: imageUrl,
+        bio,
+      }),
+    }).then((r) => {
+      setIsLoading(false);
+      if (r.ok) {
+        r.json().then((user) => setCurrentUser(user));
+      } else {
+        r.json().then((err) => setErrors(err.errors));
+      }
+    });
 
     setCurrentUser(username)
     onAddUser(newUserObj)

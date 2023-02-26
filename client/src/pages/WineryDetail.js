@@ -14,8 +14,9 @@ const WineryDetail = ({wineries, visits, comments, users, onChangeRating, onAddR
   const {currentUser} = useContext(UserContext)
   const navigate = useNavigate()
 
+  console.log(wineries)
+
   const displayWinery = wineries.find(winery => winery.id === parseInt(wineryId))
-  console.log(displayWinery)
 
   const relatedComments = comments.filter(comment => comment.winery.id === displayWinery.id)
 
@@ -30,9 +31,6 @@ const WineryDetail = ({wineries, visits, comments, users, onChangeRating, onAddR
   } else {
     displayComments = <p>No one has left any comment's yet!</p>
   }
-
-
-  
   
 
   const userVisit = visits.find(visit => visit.user.id === currentUser)
@@ -47,8 +45,15 @@ const WineryDetail = ({wineries, visits, comments, users, onChangeRating, onAddR
         wineryId: displayWinery.id,
         rating: 0
     }
-    onAddRating(newVisitObj)
-}
+    fetch("/visits", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newVisitObj),
+    }).then(r => r.json())
+    .then(data => onAddRating(data))
+  }
 
   const handleChangeRating = (rating) => {
     const updatedVisitObj = {
@@ -57,8 +62,14 @@ const WineryDetail = ({wineries, visits, comments, users, onChangeRating, onAddR
         wineryId: displayWinery.id,
         rating: rating
     }
-
-    onChangeRating(updatedVisitObj)
+    fetch(`/vists/${updatedVisitObj.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedVisitObj),
+    }).then(r => r.json())
+    .then(data => onChangeRating(data))
 
   }
 
@@ -71,7 +82,7 @@ const WineryDetail = ({wineries, visits, comments, users, onChangeRating, onAddR
       <Button onClick={handleClick}>Back to Wineries</Button>
         <DetailCard >
         <CardHeader style={{justifyContent:"space-around"}}>
-            <img src={displayWinery.imagesrc} style={{ width:"40%" }} alt="winery photo" />
+            <img src={displayWinery.imagesrc} style={{ width:"40%" }} alt={displayWinery.name} />
             <div style={{width: "40%"}}>
               <CardHeading style={{fontSize:'2em', color:'#aaa', borderBottom: '1px solid #ddd', padding:'1em', }}>{displayWinery.name}</CardHeading>
               <CardHeading style={{fontSize:'1.1em', color:'rgb(150,78,108)' }}>{displayWinery.city}</CardHeading>

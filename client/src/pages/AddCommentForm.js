@@ -25,12 +25,18 @@ const AddCommentForm = ({wineries, onAddComment, users}) => {
       comment:e.target.value
     }
 
-    //backend
+    fetch("/comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newCommentObj),
+    }).then(r => r.json())
+    .then(data => {
+      console.log("Comment successfully added")
+      onAddComment(data)})
 
-    onAddComment(newCommentObj)
-
-    navigate(-1)
-
+    navigate(`/wineries/${winery.id}`)
 
   }
 

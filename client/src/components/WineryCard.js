@@ -7,12 +7,11 @@ import { UserContext } from '../context/User';
 
 const WineryCard = ({winery, visits, onChangeRating, onAddRating}) => { 
 
-
     const {currentUser} = useContext(UserContext)
     
   
     const {id, name, about, tastingcost, rezrequired, imagesrc, city, avgRating } = winery
-
+    
     const wineryVisits = visits.filter(visit => visit.winery.id === id) 
  
     let userVisit; 

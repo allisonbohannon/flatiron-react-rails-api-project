@@ -12,8 +12,6 @@ const EditCommentForm = ({comments, wineries, onEditComment, onDeleteComment}) =
 
     const {wineryId, commentId} = useParams()
 
-    console.log({wineryId, commentId})
-
     const comment = comments.find(comment => comment.id === parseInt(commentId))
     const winery = wineries.find(winery => winery.id === parseInt(wineryId))
 
@@ -45,13 +43,18 @@ const EditCommentForm = ({comments, wineries, onEditComment, onDeleteComment}) =
 
     const handleDelete = () => {
 
-        onDeleteComment(comment)
+      fetch(`/comments/${comment.id}`, { 
+        method: "DELETE", 
+        headers: { "Content-Type": "application/json" }
+         })
+     .then(response => response.json())
+     .then(data => onDeleteComment(data))
 
-        navigate(-1)
+      navigate(-1)
         
     }
     
-  
+
    
   return (
     <Container>

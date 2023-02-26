@@ -21,10 +21,6 @@ function App() {
   const [comments, setComments] = useState([])
 
 
-  //useEffect to fetch initial state
-
-
-
   useEffect(() => {
     fetch(`/wineries`)
     .then(r => r.json())
@@ -46,8 +42,7 @@ function App() {
 
 
   const onAddComment = (comment) => {
-    console.log(comment)
-
+    setComments([...comments, comment])
   }
 
   const onEditComment = (updatedComment) => {
@@ -61,56 +56,40 @@ function App() {
     setComments(updatedComments)
   }
 
+  const onDeleteComment = (removedComment) => {
+    const updatedComments = comments.filter(comment => {
+      if (comment.id === removedComment.id) {
+        return false
+      } else {
+        return true
+      }
+    })
+
+    setComments(updatedComments)
+  }
+
   const onSignup = (userObject) => {
     setUsers([...users, userObject])
   }
 
-  const onChangeRating = (updatedVisitObj) => {
+  const onChangeRating = (updatedVisit) => {
 
-    const targetWinery = wineries.find(winery => winery.id === updatedVisitObj.wineryId)
-
-    const updatedWinery = targetWinery.visits.map(visit => {
-      if (visit.id === updatedVisitObj.id) {
-        return ({
-          userId:updatedVisitObj.userId,
-          rating:updatedVisitObj.rating, 
-          id:updatedVisitObj.id
-        })
+    const updatedVisits = visits.map(visit => {
+      if (visit.id === updatedVisit.id) { 
+        return updatedVisit
       } else {
-        return
+        return visit
       }
     })
-
-    const updatedWineries = wineries.map(winery => {
-      if (winery.id === updatedWinery.id) {
-        return updatedWinery
-      } else {
-        return winery
-      }
-    })
-
-    setWineries(updatedWineries)
+    setVisits(updatedVisits)
 
   }
 
-  const onAddRating = (newVisitObj) => {
-    
-    const updatedWineries= wineries.map(winery => {
-      if (winery.id === newVisitObj.wineryId) { 
-        return {...winery, visits: [...winery.visits, {
-          userId:newVisitObj.userId,
-          rating:newVisitObj.rating, 
-          id: 3+ Math.floor(Math.random)*100
-        }] }
-      } else {
-        return winery}
-      }
-    )
-    setWineries(updatedWineries)
-
+  const onAddRating = (newVisit) => {
+    setVisits([...visits, newVisit])
   }
 
-  //if (!currentUser) return <Login onLogin={setCurrentUser} />; 
+  //if (!currentUser) return <Login />; 
 
   return (
     <UserProvider>
@@ -135,6 +114,7 @@ function App() {
                   wineries={wineries}
                   comments={comments}
                   onEditComment={onEditComment}
+                  onDeleteComment={onDeleteComment}
                 />}/>
                  <Route path="/wineries/:wineryId/comments/new" element={<AddCommentForm
                   wineries={wineries}
@@ -148,7 +128,6 @@ function App() {
                 />}/>
                 <Route path="/users" element={<Users
                   users={users}
-                  wineries={wineries}
                   visits={visits}
                   comments={comments}
                 />} />
