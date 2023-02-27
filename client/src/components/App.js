@@ -56,7 +56,7 @@ function App() {
       comments.filter((comment) => comment.id !== deletedComment.id)
   )}
 
-  const onSignup = (userObject) => {
+  const onAddUser = (userObject) => {
     setUsers([...users, userObject])
   }
 
@@ -122,7 +122,7 @@ function App() {
                 <Route path="/login" element={<Login
                 />} />
                 <Route path="/signup" element={<SignUp
-                  onSignup={onSignup}
+                  onAddUser={onAddUser}
                 />} />
                  <Route path="/maps" element={<Maps 
                  />} />
