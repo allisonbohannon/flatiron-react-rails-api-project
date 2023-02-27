@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
     end
 
     def comment_params 
-        Params.permit(:text, :winery_id, :user_id)
+        params.permit(:text, :winery_id, :user_id)
     end
 
     def not_found

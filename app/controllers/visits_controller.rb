@@ -24,7 +24,7 @@ class VisitsController < ApplicationController
     end
 
     def visit_params 
-        Params.permit(:rating, :winery_id, :user_id)
+        params.permit(:rating, :winery_id, :user_id)
     end
 
 end
