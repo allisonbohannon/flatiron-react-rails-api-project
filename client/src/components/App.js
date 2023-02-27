@@ -40,34 +40,21 @@ function App() {
   }, [])
 
 
-
   const onAddComment = (comment) => {
-    console.log(comment)
     setComments([...comments, comment])
   }
 
   const onEditComment = (updatedComment) => {
-    const updatedComments = comments.map(comment => {
-      if (comment.id === updatedComment.id) { 
-        return updatedComment
-      } else {
-        return comment
-      }
+    setComments((comments)=> 
+      comments.map((comment)=> {
+        return comment.id === updatedComment.id ? updatedComment : comment
     })
-    setComments(updatedComments)
-  }
+  )}
 
-  const onDeleteComment = (removedComment) => {
-    const updatedComments = comments.filter(comment => {
-      if (comment.id === removedComment.id) {
-        return false
-      } else {
-        return true
-      }
-    })
-
-    setComments(updatedComments)
-  }
+  const onDeleteComment = (deletedComment) => {
+    setComments((comments) => 
+      comments.filter((comment) => comment.id !== deletedComment.id)
+  )}
 
   const onSignup = (userObject) => {
     setUsers([...users, userObject])
@@ -75,16 +62,11 @@ function App() {
 
   const onChangeRating = (updatedVisit) => {
 
-    const updatedVisits = visits.map(visit => {
-      if (visit.id === updatedVisit.id) { 
-        return updatedVisit
-      } else {
-        return visit
-      }
-    })
-    setVisits(updatedVisits)
-
-  }
+    setVisits((visits) => 
+      visits.map((visit) => {
+        return visit.id === updatedVisit.id ? updatedVisit : visit;
+      })
+  )} 
 
   const onAddRating = (newVisit) => {
     setVisits([...visits, newVisit])

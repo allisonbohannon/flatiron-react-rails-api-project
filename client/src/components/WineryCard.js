@@ -25,11 +25,18 @@ const WineryCard = ({winery, visits, onChangeRating, onAddRating}) => {
 
     const handleAddRating = () => {
         const newVisitObj = {
-            userId: currentUser,
-            wineryId: winery.id,
+            user_id: currentUser.id,
+            winery_id: winery.id,
             rating: 0
         }
-        onAddRating(newVisitObj)
+         fetch("/visits", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newVisitObj),
+        }).then(r => r.json())
+        .then(data => onAddRating(data))
     }
 
     const handleChangeRating = (rating) => {

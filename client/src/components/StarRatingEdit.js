@@ -8,8 +8,8 @@ function StarRatingEdit({ onChange, userRating }) {
   const [rating, setRating] = useState(userRating);
 
 
-
   const changeRating = (newRating) => {
+
     setRating(newRating);
     onChange?.(newRating);
   };

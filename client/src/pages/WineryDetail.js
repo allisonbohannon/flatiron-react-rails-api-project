@@ -39,8 +39,8 @@ const WineryDetail = ({wineries, visits, comments, users, onChangeRating, onAddR
 
   const handleAddRating = () => {
     const newVisitObj = {
-        userId: currentUser,
-        wineryId: displayWinery.id,
+        user_id: currentUser.id,
+        winery_id: displayWinery.id,
         rating: 0
     }
     fetch("/visits", {
@@ -53,19 +53,13 @@ const WineryDetail = ({wineries, visits, comments, users, onChangeRating, onAddR
     .then(data => onAddRating(data))
   }
 
-  const handleChangeRating = (rating) => {
-    const updatedVisitObj = {
-        id: userVisit.id,
-        userId: currentUser,
-        wineryId: displayWinery.id,
-        rating: rating
-    }
-    fetch(`/vists/${updatedVisitObj.id}`, {
+  const handleChangeRating = (newRating) => {
+    fetch(`/vists/${userVisit.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedVisitObj),
+      body: JSON.stringify({rating: newRating}),
     }).then(r => r.json())
     .then(data => onChangeRating(data))
 

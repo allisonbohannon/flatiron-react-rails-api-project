@@ -5,7 +5,7 @@ import { Container, FormField, Button, CardHeading} from '../styles';
 
 const AddCommentForm = ({wineries, onAddComment, users}) => {
 
-  const currentUser = useContext(UserContext)
+  const {currentUser} = useContext(UserContext)
   const navigate = useNavigate()
   
   const { wineryId } = useParams()
@@ -16,15 +16,13 @@ const AddCommentForm = ({wineries, onAddComment, users}) => {
 
   const handleAddComment = (e) => {
     e.preventDefault()
-
-    const user = users.find(user => user.name === currentUser.name)
     
     const newCommentObj = {
-      wineryId:winery.id,
-      userId:user.id,
-      comment:comment
+      winery_id: winery.id,
+      user_id: currentUser.id,
+      text: comment
     }
-    console.log({newCommentObj})
+     console.log(newCommentObj)
     fetch("/comments", {
       method: "POST",
       headers: {
@@ -35,11 +33,9 @@ const AddCommentForm = ({wineries, onAddComment, users}) => {
       if (r.ok) {
         r.json().then((data) => onAddComment(data))
       } else {
-        console.log()
         r.json().then((err) => console.log(err.errors))
       }
       })
-
 
     navigate(`/wineries/${winery.id}`)
 

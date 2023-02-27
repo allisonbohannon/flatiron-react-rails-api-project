@@ -28,29 +28,26 @@ const EditCommentForm = ({comments, wineries, onEditComment, onDeleteComment}) =
     const handleEditComment = (e) => {
         e.preventDefault()
 
-        const updatedComment = {...comment, text: commentText}
-
         fetch(`/comments/${comment.id}`, { 
             method: "PATCH", 
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(updatedComment)
+            body: JSON.stringify({text: commentText})
              })
          .then(response => response.json())
          .then(data => onEditComment(data))
      
-        navigate(-1)
+        navigate(`/wineries/${winery.id}`)
     }
 
     const handleDelete = () => {
-
       fetch(`/comments/${comment.id}`, { 
         method: "DELETE", 
         headers: { "Content-Type": "application/json" }
          })
      .then(response => response.json())
-     .then(data => onDeleteComment(data))
+     .then(data => onDeleteComment(comment))
 
-      navigate(-1)
+      navigate(`/wineries/${winery.id}`)
         
     }
     
