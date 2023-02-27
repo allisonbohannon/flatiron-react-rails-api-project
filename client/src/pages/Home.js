@@ -1,8 +1,10 @@
 import React from 'react'
+import pic from '../images/vinpals.png'
+import { Container } from '../styles'
 
 const Home = () => {
   return (
-    <div>Home</div>
+       <img src={pic} style={{width:"100%"}}/>
   )
 }
 
