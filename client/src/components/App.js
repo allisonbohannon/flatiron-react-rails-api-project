@@ -42,6 +42,7 @@ function App() {
 
 
   const onAddComment = (comment) => {
+    console.log(comment)
     setComments([...comments, comment])
   }
 

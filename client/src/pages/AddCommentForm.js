@@ -22,19 +22,24 @@ const AddCommentForm = ({wineries, onAddComment, users}) => {
     const newCommentObj = {
       wineryId:winery.id,
       userId:user.id,
-      comment:e.target.value
+      comment:comment
     }
-
+    console.log({newCommentObj})
     fetch("/comments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newCommentObj),
-    }).then(r => r.json())
-    .then(data => {
-      console.log("Comment successfully added")
-      onAddComment(data)})
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((data) => onAddComment(data))
+      } else {
+        console.log()
+        r.json().then((err) => console.log(err.errors))
+      }
+      })
+
 
     navigate(`/wineries/${winery.id}`)
 

@@ -14,8 +14,6 @@ const WineryDetail = ({wineries, visits, comments, users, onChangeRating, onAddR
   const {currentUser} = useContext(UserContext)
   const navigate = useNavigate()
 
-  console.log(wineries)
-
   const displayWinery = wineries.find(winery => winery.id === parseInt(wineryId))
 
   const relatedComments = comments.filter(comment => comment.winery.id === displayWinery.id)

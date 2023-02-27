@@ -14,7 +14,6 @@ const NavigationBar = ({users}) =>  {
         console.log("Checking for login")
         fetch("/me").then((r) => {
           if (r.ok) {
-            console.log(r)
             r.json().then((user) => setCurrentUser(user));
           } else {
             console.log("No user logged in")
