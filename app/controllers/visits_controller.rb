@@ -11,7 +11,7 @@ class VisitsController < ApplicationController
     end
 
     def update
-        visit = Visit.find_visit
+        visit = find_visit
         visit.update(visit_params)
         render json: visit
     end

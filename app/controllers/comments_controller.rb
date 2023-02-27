@@ -12,13 +12,13 @@ class CommentsController < ApplicationController
     end
 
     def update
-        comment = Comment.find_comment
+        comment = find_comment
         comment.update(comment_params)
         render json: comment
     end
 
     def destroy 
-        comment = Comment.find_comment
+        comment = find_comment
         comment.destroy
         render json: {}
     end
