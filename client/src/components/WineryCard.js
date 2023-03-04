@@ -8,7 +8,6 @@ import { UserContext } from '../context/User';
 const WineryCard = ({winery, visits, onChangeRating, onAddRating}) => { 
 
     const {currentUser} = useContext(UserContext)
-    
   
     const {id, name, about, tastingcost, rezrequired, imagesrc, city, avgRating } = winery
     
@@ -21,7 +20,6 @@ const WineryCard = ({winery, visits, onChangeRating, onAddRating}) => {
     } else {
         userVisit = null
     }
-
 
     const handleAddRating = () => {
         const newVisitObj = {
@@ -59,7 +57,7 @@ const WineryCard = ({winery, visits, onChangeRating, onAddRating}) => {
   return (
     <Card>
         <CardHeader>
-            <img src={imagesrc} style={{ width:'20em', border:'1px solid gray'} }/>
+            <img src={imagesrc} alt={name} style={{ width:'20em', border:'1px solid gray'} }/>
         </CardHeader>
         <Link to={`/wineries/${id}`} style={{display: 'inline-block',
                                     fontSize: '1.2em',

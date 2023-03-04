@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import CommentCard from '../components/CommentCard';
 import { Link } from 'react-router-dom';
-import { DetailCard, Button, Container, CardHeader, CardHeading, CardScroller, CardBody, CardButton } from '../styles';
+import { DetailCard, Button, Container, CardHeader, CardHeading, CardBody, CardButton } from '../styles';
 import StarRatingShow from '../components/StarRatingShow';
 import StarRatingEdit from '../components/StarRatingEdit';
 import { UserContext } from '../context/User';

@@ -1,25 +1,22 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext} from 'react'
 import { NavLink } from "react-router-dom";
 import { NavBar, Button, NavLinkStyle } from "../styles";
 import { UserContext } from '../context/User';
 import pic from '../images/logo.png'
 
-const NavigationBar = ({}) =>  {
+const NavigationBar = () =>  {
 
     const { currentUser, setCurrentUser } = useContext(UserContext)
-  
-
-
-    
 
     const handleLogout = () =>{
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
               setCurrentUser(null);
             } else {
+                console.log("Unable to log out")
             }
           });
-    }
+    }; 
 
     return (
         <NavBar>
@@ -29,7 +26,7 @@ const NavigationBar = ({}) =>  {
                     exact="true"
                     style={{position:"absolute", left:"0px", top:"0px"}}
                     >
-                    <img src={pic} style={{height:"8em"}}></img>
+                    <img src={pic} alt="logo" style={{height:"8em"}}></img>
                 </NavLink>
             </NavLinkStyle>
             <NavLinkStyle>

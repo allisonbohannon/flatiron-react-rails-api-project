@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
 
-    const { currentUser, setCurrentUser } = useContext(UserContext)
+    const { setCurrentUser } = useContext(UserContext)
     const navigate = useNavigate()
 
 

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { CardButton, Error, Input, FormField, Label, Textarea, Container } from "../styles";
+import { CardButton, Error, Input, FormField, Label, Container } from "../styles";
 import { UserContext } from "../context/User";
 
 function SignUpForm({onAddUser}) {
@@ -14,12 +14,6 @@ function SignUpForm({onAddUser}) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    const newUserObj = {
-        username,
-        password,
-        password_confirmation: passwordConfirmation,
-      }
 
     setErrors([]);
     setIsLoading(true);

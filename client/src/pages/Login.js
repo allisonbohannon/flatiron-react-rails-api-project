@@ -5,7 +5,7 @@ import { CardContainer } from '../styles'
 
 
 
-const Login = ({}) => {
+const Login = () => {
   return (
     <CardContainer style={{ display:'inline-block'}}>
         <LoginForm />

@@ -22,7 +22,7 @@ const EditCommentForm = ({comments, wineries, onEditComment, onDeleteComment}) =
         if (comment.user.id !== currentUser.id) {
             navigate(`/wineries/${winery.id}/comments/${comment.id}`)
         }
-    }, [])
+    }, [currentUser])
   
     const handleEditComment = (e) => {
         e.preventDefault()

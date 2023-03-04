@@ -26,9 +26,7 @@ function App() {
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => setCurrentUser(user));
-      } else {
-        console.log("No user logged in")
-      }
+      } 
     });
   }, []);
 
