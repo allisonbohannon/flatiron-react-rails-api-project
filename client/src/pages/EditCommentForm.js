@@ -10,9 +10,11 @@ const EditCommentForm = ({comments, wineries, onEditComment, onDeleteComment}) =
     const {currentUser} = useContext(UserContext)
     const {wineryId, commentId} = useParams()
     const [error, setError] = useState(null);
+    
+    const comment = comments.find(comment => comment.id === parseInt(commentId))
+   
     const [commentText, setCommentText] = useState(comment.text)
 
-    const comment = comments.find(comment => comment.id === parseInt(commentId))
     const winery = wineries.find(winery => winery.id === parseInt(wineryId))
 
     
@@ -20,9 +22,7 @@ const EditCommentForm = ({comments, wineries, onEditComment, onDeleteComment}) =
         if (comment.user.id !== currentUser.id) {
             navigate(`/wineries/${winery.id}/comments/${comment.id}`)
         }
-    })
-
-   
+    }, [])
   
     const handleEditComment = (e) => {
         e.preventDefault()

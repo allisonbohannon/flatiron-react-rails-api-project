@@ -6,6 +6,7 @@ const Container = styled.div`
   margin: 10em; 
   display: inline-block;
   overflow: hidden;
+  justify-content:center; 
 `
 
 export default Container

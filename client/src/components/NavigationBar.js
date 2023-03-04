@@ -9,15 +9,7 @@ const NavigationBar = ({}) =>  {
     const { currentUser, setCurrentUser } = useContext(UserContext)
   
 
-    useEffect(() => {
-        fetch("/me").then((r) => {
-          if (r.ok) {
-            r.json().then((user) => setCurrentUser(user));
-          } else {
-            console.log("No user logged in")
-          }
-        });
-      }, []);
+
     
 
     const handleLogout = () =>{
@@ -67,7 +59,7 @@ const NavigationBar = ({}) =>  {
 
             <p style={{color: '#ffffff'}}>{currentUser? `Cheers, ${currentUser.username}!` : ""}</p>
             <div>{currentUser?  (
-                    <Button onClick={handleLogout}>Logout</Button>) : (
+                    <Button variant="outline" onClick={handleLogout}>Logout</Button>) : (
                     <NavLink to="/Login"><Button>Log In</Button></NavLink>)}
             </div> 
         </NavBar>

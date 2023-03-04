@@ -11,7 +11,6 @@ import AddCommentForm from "../pages/AddCommentForm";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Maps from "../pages/Maps";
-import { visitsTest, commentsTest} from "../testdata";
 import { UserContext } from "../context/User";
 
 
@@ -22,6 +21,16 @@ function App() {
   const [comments, setComments] = useState([])
   const { currentUser, setCurrentUser} =useContext(UserContext)
 
+
+  useEffect(() => {
+    fetch("/me").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setCurrentUser(user));
+      } else {
+        console.log("No user logged in")
+      }
+    });
+  }, []);
 
   useEffect(() => {
     fetch(`/wineries`)
@@ -40,17 +49,6 @@ function App() {
     .then(r => r.json())
     .then(data => setComments(data))
   }, [])
-
-  useEffect(() => {
-    fetch("/me").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setCurrentUser(user));
-      } else {
-        console.log("No user logged in")
-      }
-    });
-  }, []);
-
 
   const onAddComment = (comment) => {
     setComments([...comments, comment])
