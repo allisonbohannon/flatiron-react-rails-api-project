@@ -14,6 +14,7 @@ class WineriesController < ApplicationController
     def create 
         winery = Winery.create(winery_params)
         render json: winery, status: :created 
+    end
     
     private 
 
@@ -24,4 +25,5 @@ class WineriesController < ApplicationController
     def winery_params
         params.permit(:name, :about, :tastingcost, :rezrequired, :imagesrc, :address1, :address2, :city, :avgRating)
     end
+
 end
