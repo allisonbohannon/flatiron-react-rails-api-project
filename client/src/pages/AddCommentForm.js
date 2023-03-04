@@ -1,18 +1,18 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { UserContext } from '../context/User';
-import { Container, FormField, Button, CardHeading} from '../styles';
+import { Container, FormField, Button, CardHeading, Error} from '../styles';
 
-const AddCommentForm = ({wineries, onAddComment, users}) => {
+const AddCommentForm = ({wineries, onAddComment}) => {
 
+  const [comment, setComment] = useState("")
+  const [error, setError] = useState(null);
   const {currentUser} = useContext(UserContext)
   const navigate = useNavigate()
   
   const { wineryId } = useParams()
 
   const winery = wineries.find(winery => winery.id === parseInt(wineryId))
-
-  const [comment, setComment] = useState("")
 
   const handleAddComment = (e) => {
     e.preventDefault()
@@ -22,7 +22,7 @@ const AddCommentForm = ({wineries, onAddComment, users}) => {
       user_id: currentUser.id,
       text: comment
     }
-     console.log(newCommentObj)
+    setError(null)
     fetch("/comments", {
       method: "POST",
       headers: {
@@ -31,16 +31,17 @@ const AddCommentForm = ({wineries, onAddComment, users}) => {
       body: JSON.stringify(newCommentObj),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((data) => onAddComment(data))
+        r.json().then((data) => {
+          onAddComment(data)
+          navigate(`/wineries/${winery.id}`)
+        })
       } else {
-        r.json().then((err) => console.log(err.errors))
+        r.json().then((err) => {
+          setError(err.error)
+        });
       }
       })
-
-    navigate(`/wineries/${winery.id}`)
-
   }
-
 
   return (
     <Container>
@@ -59,6 +60,9 @@ const AddCommentForm = ({wineries, onAddComment, users}) => {
         </FormField>
         <FormField>
           <Button variant="fill" color="primary" type="submit">Submit</Button>
+        </FormField>
+        <FormField>
+          {error? <Error>{error}</Error> : "" }
         </FormField>
       </form>
     </Container>

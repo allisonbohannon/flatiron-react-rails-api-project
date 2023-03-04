@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { UserContext } from '../context/User';
-import { Container, FormField, Button, CardHeading } from '../styles';
+import { Container, FormField, Button, CardHeading, Error } from '../styles';
 
 
 const EditCommentForm = ({comments, wineries, onEditComment, onDeleteComment}) => {
 
     const navigate = useNavigate()
-
     const {currentUser} = useContext(UserContext)
-
     const {wineryId, commentId} = useParams()
+    const [error, setError] = useState(null);
+    const [commentText, setCommentText] = useState(comment.text)
 
     const comment = comments.find(comment => comment.id === parseInt(commentId))
     const winery = wineries.find(winery => winery.id === parseInt(wineryId))
@@ -19,24 +19,33 @@ const EditCommentForm = ({comments, wineries, onEditComment, onDeleteComment}) =
     useEffect(() => {
         if (comment.user.id !== currentUser.id) {
             navigate(`/wineries/${winery.id}/comments/${comment.id}`)
-            console.log("Edit Access Denied")
         }
     })
 
-    const [commentText, setCommentText] = useState(comment.text)
+   
   
     const handleEditComment = (e) => {
         e.preventDefault()
+
+        setError(null)
 
         fetch(`/comments/${comment.id}`, { 
             method: "PATCH", 
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({text: commentText})
              })
-         .then(response => response.json())
-         .then(data => onEditComment(data))
-     
-        navigate(`/wineries/${winery.id}`)
+         .then((r) =>  {
+          if (r.ok) {
+            r.json().then((data) => {
+              onEditComment(data)
+              navigate(`/wineries/${winery.id}`)
+            })
+          } else {
+            r.json().then((err) => {
+              setError(err.error)
+            })
+          }
+         })
     }
 
     const handleDelete = () => {
@@ -71,6 +80,9 @@ const EditCommentForm = ({comments, wineries, onEditComment, onDeleteComment}) =
         <FormField>
           <Button variant="fill" color="primary" type="submit">Submit</Button>
           <Button variant="fill" color="primary" onClick={handleDelete}>Delete</Button>
+        </FormField>
+        <FormField>
+          {error? <Error>{error}</Error> : "" }
         </FormField>
       </form>
     </Container>
