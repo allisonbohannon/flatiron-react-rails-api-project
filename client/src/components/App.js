@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import NavigationBar from "./NavigationBar";
 import Home from "../pages/Home";
@@ -12,13 +12,15 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import Maps from "../pages/Maps";
 import { visitsTest, commentsTest} from "../testdata";
-import { UserProvider } from "../context/User";
+import { UserContext } from "../context/User";
+
 
 function App() {
   const [wineries, setWineries] = useState([])
   const [users, setUsers] = useState([])
   const [visits, setVisits] = useState([])
   const [comments, setComments] = useState([])
+  const { currentUser} =useContext(UserContext)
 
 
   useEffect(() => {
@@ -72,10 +74,10 @@ function App() {
     setVisits([...visits, newVisit])
   }
 
-  //if (!currentUser) return <Login />; 
+  if (!currentUser) return <Login />; 
 
   return (
-    <UserProvider>
+    <div>
             <NavigationBar users={users} />
             <Routes>
                 <Route path="/wineries" element={<Wineries
@@ -130,7 +132,7 @@ function App() {
                 />} />
                
             </Routes>
-        </UserProvider>
+        </div>
   );
 }
 
