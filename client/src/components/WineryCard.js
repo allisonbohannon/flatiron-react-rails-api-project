@@ -46,7 +46,6 @@ const WineryCard = ({winery, visits, onChangeRating, onAddRating}) => {
             wineryId: winery.id,
             rating: rating
         }
-
         onChangeRating(updatedVisitObj)
 
     }
