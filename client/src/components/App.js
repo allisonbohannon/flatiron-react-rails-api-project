@@ -20,7 +20,7 @@ function App() {
   const [users, setUsers] = useState([])
   const [visits, setVisits] = useState([])
   const [comments, setComments] = useState([])
-  const { currentUser} =useContext(UserContext)
+  const { currentUser, setCurrentUser} =useContext(UserContext)
 
 
   useEffect(() => {
@@ -40,6 +40,16 @@ function App() {
     .then(r => r.json())
     .then(data => setComments(data))
   }, [])
+
+  useEffect(() => {
+    fetch("/me").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setCurrentUser(user));
+      } else {
+        console.log("No user logged in")
+      }
+    });
+  }, []);
 
 
   const onAddComment = (comment) => {
