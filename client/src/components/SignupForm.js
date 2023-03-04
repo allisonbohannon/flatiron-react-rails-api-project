@@ -37,7 +37,6 @@ function SignUpForm({onAddUser}) {
       setIsLoading(false);
       if (r.ok) {
         r.json().then((user) => {
-          console.log(user)
           onAddUser(user)
           setCurrentUser(user)});
       } else {

@@ -3,15 +3,12 @@ import { NavLink } from "react-router-dom";
 import { NavBar, Button, NavLinkStyle } from "../styles";
 import { UserContext } from '../context/User';
 
-const NavigationBar = ({users}) =>  {
+const NavigationBar = ({}) =>  {
 
     const { currentUser, setCurrentUser } = useContext(UserContext)
-    // const testUser = users[5]
-    // setCurrentUser(testUser)
+  
 
     useEffect(() => {
-        // auto-login
-        console.log("Checking for login")
         fetch("/me").then((r) => {
           if (r.ok) {
             r.json().then((user) => setCurrentUser(user));

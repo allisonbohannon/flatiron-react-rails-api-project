@@ -78,7 +78,7 @@ function App() {
 
   return (
     <div>
-            <NavigationBar users={users} />
+            <NavigationBar />
             <Routes>
                 <Route path="/wineries" element={<Wineries
                   wineries={wineries}
