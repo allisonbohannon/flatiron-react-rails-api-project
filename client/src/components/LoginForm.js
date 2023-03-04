@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
-import { Button, Error, Input, FormField, Label, Container} from "../styles";
+import { Link } from 'react-router-dom'
+import { CardButton, Error, Input, FormField, Label, Container} from "../styles";
 import { UserContext } from "../context/User";
 import { useNavigate } from "react-router-dom";
 
@@ -66,15 +67,23 @@ const LoginForm = () => {
           />
         </FormField>
         <FormField>
-          <Button variant="fill" color="primary" type="submit">
+          <CardButton variant="fill" color="primary" type="submit">
             {isLoading ? "Loading..." : "Login"}
-          </Button>
+          </CardButton>
         </FormField>
         <FormField>
           {error? <Error>{error}</Error> : "" }
         </FormField>
-      </form> 
-
+        <FormField>
+          <CardButton>
+            <Link 
+            style={{textDecoration:"none", color:"white"}}
+            to='/signup'> 
+            Not a Member? Sign up now!
+            </Link>
+          </CardButton>
+        </FormField>
+      </form>
       </Container>
        
        );

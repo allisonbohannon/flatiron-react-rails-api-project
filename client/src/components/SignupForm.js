@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Button, Error, Input, FormField, Label, Textarea, Container } from "../styles";
+import { CardButton, Error, Input, FormField, Label, Textarea, Container } from "../styles";
 import { UserContext } from "../context/User";
 
 function SignUpForm({onAddUser}) {
@@ -79,7 +79,7 @@ function SignUpForm({onAddUser}) {
           />
         </FormField>
         <FormField>
-          <Button type="submit">{isLoading ? "Loading..." : "Sign Up"}</Button>
+          <CardButton type="submit">{isLoading ? "Loading..." : "Sign Up"}</CardButton>
         </FormField>
         <FormField>
           {errors.map((err) => (

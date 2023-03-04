@@ -2,6 +2,7 @@ import React, {useContext, useEffect} from 'react'
 import { NavLink } from "react-router-dom";
 import { NavBar, Button, NavLinkStyle } from "../styles";
 import { UserContext } from '../context/User';
+import pic from '../images/logo.png'
 
 const NavigationBar = ({}) =>  {
 
@@ -34,9 +35,9 @@ const NavigationBar = ({}) =>  {
                 <NavLink
                     to="/"
                     exact="true"
-                    style={{font:'Arial', fontSize:'2em', color:'#aaa'}}
+                    style={{position:"absolute", left:"0px", top:"0px"}}
                     >
-                    VinPals
+                    <img src={pic} style={{height:"8em"}}></img>
                 </NavLink>
             </NavLinkStyle>
             <NavLinkStyle>

@@ -14,6 +14,7 @@ export const CardContainer = styled.div`
 
 
 export const Card = styled.div`
+  position: relative; 
   display: inline-grid;
   align-items: center;
   justify-content: center;
@@ -21,7 +22,7 @@ export const Card = styled.div`
   padding: 1em;
   margin: 1em;
   width: 20em;
-  height: 48em;
+  height: 50em;
   font-family: Verdana, sans-serif;
   border: 1px ;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -74,7 +75,7 @@ export const CardScroller = styled.div`
   height: 25%;
   width: 100%;
   border: 1px solid black
-  overflow: auto;
+  overflow: scroll;
 `
 
 export const CardFieldset = styled.fieldset`
@@ -179,7 +180,7 @@ export const CardButton = styled.button`
   font-size: 1rem;
   font-weight: 700;
   color: #fff;
-  background-color:#723d46;
+  background-color:#4d012b;
   border: 0;
   box-shadow: none;
   border-radius: 6px;

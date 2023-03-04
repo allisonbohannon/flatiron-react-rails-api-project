@@ -5,12 +5,12 @@ const NavBar = styled.nav`
     position: fixed; 
     top: 0; 
     right: 0; 
-    height: 10vh; 
+    height: 15vh; 
     width: 100%; 
     @media screen and (min-width):790px { 
         width: 60%
     };
-    background-color: #472d30; 
+    background-color: #4d012b; 
     z-index:99; 
     display:flex; 
     flex-direction: row; 

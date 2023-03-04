@@ -1,5 +1,5 @@
 import React from 'react';  
-import { Card, CardBody, CardHeader, CardHeading, CardScroller } from '../styles';
+import { Card, CardBody, CardHeader, CardHeading } from '../styles';
 import StarRatingShow from './StarRatingShow';
 
 
@@ -15,14 +15,13 @@ const UserCard = ({user, visits}) => {
  return (
     <Card style={{height:'20em'}}>
         <CardHeader>
-            <CardHeading>{user.username}</CardHeading>
+            <CardHeading style={{position:"absolute", top:"0px", left:"3px"}}>{user.username}</CardHeading>
         </CardHeader>
-        <CardBody>
-            <p>{user.bio}</p>
+        <CardBody style={{position:"absolute", top:"5em"}}>
             <CardHeading style={{'font-size':'1.1em', color:'rgb(150,78,108)' }}>Wineries Visited:</CardHeading>
-            <CardScroller >
+            <div style={{height:"12em", overflow:"auto"}} >
                 {userRatings}
-            </CardScroller>
+            </div>
         </CardBody>
     </Card>
   
