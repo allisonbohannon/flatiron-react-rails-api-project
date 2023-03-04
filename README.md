@@ -5,6 +5,12 @@
 
 This project allows users to discover, rate, and leave comments on wineries. A user is able to login to the site, browse wineries, add ratings or comments to wineries, edit their own ratings or comments, and view users and how they rated the wineries they've visited. 
 
+This project uses Ruby on Rails backend to handle data stored in the databased, with a React front end for the user interface. 
+
+The data contains 4 data tables, with User and Winery data having a many-to-many relationship via Ratings and Comments. 
+
+<img src="./client/src/images/erd.png" alt="relational diagram" />
+
 
 ## Requirements
 
@@ -17,17 +23,18 @@ To run this project locally; clone the respository and run the following code:
 
 ```sh
 bundle install
+rails db:create
 rails db:migrate
-rails db:seed (if you want to use the seed data)
+rails db:seed *
 npm install --prefix client
 ```
+ <em>*Optional</em>
 
 You can use the following commands to run the application:
 
 - `rails s`: run the backend on [http://localhost:3000](http://localhost:3000)
 - `npm start --prefix client`: run the frontend on
   [http://localhost:4000](http://localhost:4000)
-
 
 
 ## Key Technologies Used
