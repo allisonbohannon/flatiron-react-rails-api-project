@@ -8,7 +8,7 @@ import StarRatingEdit from '../components/StarRatingEdit';
 import { UserContext } from '../context/User';
 
 
-const WineryDetail = ({wineries, visits, comments, users, onChangeRating, onAddRating}) => {
+const WineryDetail = ({wineries, visits, comments, users, onChangeRating, onAddRating, onUpdateWinery}) => {
 
   const { wineryId } = useParams()
   const {currentUser} = useContext(UserContext)
@@ -54,14 +54,19 @@ const WineryDetail = ({wineries, visits, comments, users, onChangeRating, onAddR
   }
 
   const handleChangeRating = (newRating) => {
-    fetch(`/vists/${userVisit.id}`, {
+    fetch(`/visits/${userVisit.id}`, {
       method: "PATCH",
       headers: {
-        "Content-Type": "application/json",
+          "Content-Type": "application/json",
       },
       body: JSON.stringify({rating: newRating}),
-    }).then(r => r.json())
-    .then(data => onChangeRating(data))
+      }).then(r => r.json())
+      .then(data => {
+          onChangeRating(data)
+          fetch(`/wineries/${displayWinery.id}`)
+          .then(r => r.json())
+          .then(data => onUpdateWinery(data))
+      })
 
   }
 

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   resources :comments, only: [:index, :create, :update, :destroy]
   resources :visits, only: [:index, :create, :update]
-  resources :wineries, only: [:index, :create, :update]
+  resources :wineries, only: [:index, :show, :create, :update]
   resources :users, only: [:index, :create]
 
   post "/signup", to: "users#create"

@@ -69,7 +69,6 @@ function App() {
   }
 
   const onChangeRating = (updatedVisit) => {
-
     setVisits((visits) => 
       visits.map((visit) => {
         return visit.id === updatedVisit.id ? updatedVisit : visit;
@@ -79,6 +78,13 @@ function App() {
   const onAddRating = (newVisit) => {
     setVisits([...visits, newVisit])
   }
+
+  const onUpdateWinery = (updatedWinery) => {
+    setWineries((wineries) => 
+      wineries.map((winery) => {
+        return winery.id === updatedWinery.id ? updatedWinery : winery; 
+      })
+  )}
 
   if (!currentUser) return <Login />; 
 
@@ -92,6 +98,7 @@ function App() {
                   comments={comments}
                   onChangeRating={onChangeRating}
                   onAddRating={onAddRating}
+                  onUpdateWinery={onUpdateWinery}
                 />}/> 
                 <Route path="/wineries/:wineryId" element={<WineryDetail
                   wineries={wineries}
@@ -100,6 +107,7 @@ function App() {
                   comments={comments}
                   onChangeRating={onChangeRating}
                   onAddRating={onAddRating}
+                  onUpdateWinery={onUpdateWinery}
                 />}/>
                  <Route path="/wineries/:wineryId/comments/:commentId/edit" element={<EditCommentForm
                   wineries={wineries}

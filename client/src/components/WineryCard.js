@@ -5,7 +5,7 @@ import StarRatingShow from './StarRatingShow';
 import StarRatingEdit from './StarRatingEdit';
 import { UserContext } from '../context/User';
 
-const WineryCard = ({winery, visits, onChangeRating, onAddRating}) => { 
+const WineryCard = ({winery, visits, onChangeRating, onAddRating, onUpdateWinery}) => { 
 
     const {currentUser} = useContext(UserContext)
   
@@ -37,15 +37,21 @@ const WineryCard = ({winery, visits, onChangeRating, onAddRating}) => {
         .then(data => onAddRating(data))
     }
 
-    const handleChangeRating = (rating) => {
-        const updatedVisitObj = {
-            id: userVisit[0].id,
-            userId: currentUser,
-            wineryId: winery.id,
-            rating: rating
-        }
-        onChangeRating(updatedVisitObj)
-
+    const handleChangeRating = (newRating) => {
+        fetch(`/visits/${userVisit.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({rating: newRating}),
+            }).then(r => r.json())
+            .then(data => {
+                onChangeRating(data)
+                fetch(`/wineries/${winery.id}`)
+                .then(r => r.json())
+                .then(data => {
+                    onUpdateWinery(data)})
+                })
     }
     
     const displayAvgRating = () =>  <StarRatingShow rating={avgRating}/>
