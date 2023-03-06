@@ -1,10 +1,12 @@
 import React, { useState, useContext } from "react";
 import { CardButton, Error, Input, FormField, Label, Container } from "../styles";
 import { UserContext } from "../context/User";
+import { useNavigate } from "react-router-dom";
 
 function SignUpForm({onAddUser}) {
 
   const { setCurrentUser } = useContext(UserContext)
+  const navigate = useNavigate()
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -32,7 +34,9 @@ function SignUpForm({onAddUser}) {
       if (r.ok) {
         r.json().then((user) => {
           onAddUser(user)
-          setCurrentUser(user)});
+          setCurrentUser(user)})
+          navigate(`/`)
+          ;
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
