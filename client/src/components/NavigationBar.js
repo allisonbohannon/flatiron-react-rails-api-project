@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { NavBar, Button, NavLinkStyle } from "../styles";
 import { UserContext } from '../context/User';
 import pic from '../images/logo.png'
@@ -7,11 +7,13 @@ import pic from '../images/logo.png'
 const NavigationBar = () =>  {
 
     const { currentUser, setCurrentUser } = useContext(UserContext)
+    const navigate = useNavigate()
 
     const handleLogout = () =>{
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
-              setCurrentUser(null);
+              setCurrentUser(null)
+              navigate(`/`);
             } else {
                 console.log("Unable to log out")
             }

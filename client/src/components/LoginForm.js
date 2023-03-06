@@ -83,7 +83,6 @@ const LoginForm = () => {
             </Link>
           </CardButton>
       </Container>
-       
        );
    
   }
