@@ -86,7 +86,17 @@ function App() {
       })
   )}
 
-  if (!currentUser) return <Login />; 
+  if (!currentUser) return (
+    <div>
+      <Routes>
+        <Route path="/" element={<Login
+                />} />
+        <Route path="/signup" element={<SignUp
+                  onAddUser={onAddUser}
+                />} />
+      </Routes>
+    </div>
+    ); 
 
   return (
     <div>
@@ -134,11 +144,6 @@ function App() {
                   users={users}
                   visits={visits}
                   comments={comments}
-                />} />
-                <Route path="/login" element={<Login
-                />} />
-                <Route path="/signup" element={<SignUp
-                  onAddUser={onAddUser}
                 />} />
                  <Route path="/maps" element={<Maps 
                  />} />

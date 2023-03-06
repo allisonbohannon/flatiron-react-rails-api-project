@@ -74,16 +74,14 @@ const LoginForm = () => {
         <FormField>
           {error? <Error>{error}</Error> : "" }
         </FormField>
-        <FormField>
-          <CardButton>
+      </form>
+      <CardButton>
             <Link 
-            style={{textDecoration:"none", color:"white"}}
-            to='/signup'> 
-            Not a Member? Sign up now!
+                style={{textDecoration:"none", color:"white"}}
+                to='/signup'> 
+                Not a Member? Sign up now!
             </Link>
           </CardButton>
-        </FormField>
-      </form>
       </Container>
        
        );
