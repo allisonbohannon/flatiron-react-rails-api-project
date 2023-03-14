@@ -3,11 +3,9 @@ import { Card, CardBody, CardHeader, CardHeading } from '../styles';
 import StarRatingShow from './StarRatingShow';
 
 
-const UserCard = ({user, visits}) => {    
-
-    const userVisits = visits.filter(visit => visit.user.id === user.id)
+const UserCard = ({user}) => {    
         
-    const userRatings = userVisits.map(visit => { 
+    const userRatings = user.visits.map(visit => { 
             return (<li>{visit.winery.name}: <StarRatingShow rating={visit.rating}/></li>)
     })
  
